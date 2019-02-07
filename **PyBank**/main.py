@@ -12,8 +12,8 @@ with open(pybankCSV, newline='') as csvfile:
 
     # Read the header row first
     csv_header = next(csvreader)
-    #print(f"CSV Header: {csv_header}")
 
+    # Initialize counters and lists
     counter=0
     add=0
     profits = []
@@ -32,6 +32,7 @@ with open(pybankCSV, newline='') as csvfile:
     
     averagechange = round((sum(deltas))/(len(deltas)), 2)
 
+# Find max month
 max = 0
 for y in deltas:
     if y > max:
@@ -39,6 +40,7 @@ for y in deltas:
         z = deltas.index(y)
         maxmonth = months[z+1]
 
+# Find min month
 min = 0
 for y in deltas:
     if y < min:
