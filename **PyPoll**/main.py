@@ -14,45 +14,62 @@ with open(pypollCSV, newline='') as csvfile:
     csv_header = next(csvreader)
 
     totalcounter=0
-    khancounter=0
-    correycounter=0
-    licounter=0
-    tooleycounter=0
     candidates = []
+    totals = []
+    unique = []
+    count = 0
     
     # Read each row of data after the header
     for row in csvreader:
         totalcounter +=1
         candidates.append(row[2])
     
-    # Count candidate votes
+    # Sort candidates list
+    candidates.sort()
+    
+    # Append placeholder to accommodate count loops
+    candidates.append("Placeholder")
+
+    # Dynamic counting of candidate votes
     for x in candidates:
-        if x == "Khan":
-            khancounter +=1
-        if x == "Correy":
-            correycounter +=1
-        if x == "Li":
-            licounter +=1
-        if x == "O'Tooley":
-            tooleycounter +=1
+        if x not in unique:
+            unique.append(x)
+            count +=1
+            totals.append(count)
+            count = 0
+        else: 
+            count +=1
+    totals.pop(0)
+    unique.pop(-1)
 
-totals = [khancounter, correycounter, licounter, tooleycounter]
+# combine = zip(unique, totals)
 
-# Calculate percentages
-khanpercent = ((khancounter)/(totalcounter))*100
-correypercent = ((correycounter)/(totalcounter))*100
-lipercent = ((licounter)/(totalcounter))*100
-tooleypercent = ((tooleycounter)/(totalcounter))*100
+# combinedlist = list(combine)
 
-winner = max(khancounter, correycounter, licounter, tooleycounter)
+# Max votes to use in for loop to find winner
+maxvotes = max(totals)
 
+# Using for loop to find winner using index method
+for x in totals:
+    if x == maxvotes:
+        y = totals.index(x)
+        winner = unique[1]
+
+# Calculate percentages of votes
+khanpercent = round(float(((totals[1])/totalcounter)*100), 2)
+correypercent = round(float(((totals[0])/totalcounter)*100), 2)
+lipercent = round(float(((totals[2])/totalcounter)*100), 2)
+tooleypercent = round(float(((totals[3])/totalcounter)*100), 2)
+
+print("                               ")
 print("Election Results")
 print("---------------------")
 print(f"Total Votes: {totalcounter}")
 print("---------------------")
-print(f"Khan: {khanpercent}% ({khancounter})")
-print(f"Correy: {correypercent}% ({correycounter})")
-print(f"Li: {lipercent}% ({licounter})")
-print(f"O'Tooley: {tooleypercent}% ({tooleycounter})")
+print(f"Khan: {khanpercent}% ({totals[1]})")
+print(f"Correy: {correypercent}% ({totals[0]})")
+print(f"Li: {lipercent}% ({totals[2]})")
+print(f"O'Tooley: {tooleypercent}% ({totals[3]})")
 print("---------------------")
 print(f"Winner: {winner}")
+print("---------------------")

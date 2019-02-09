@@ -48,6 +48,8 @@ for y in deltas:
         r = deltas.index(y)
         minmonth = months[r+1]
 
+# Print to terminal
+print("                              ")
 print("Financial Analysis")
 print("---------------------")
 print(f"Total Months: {counter}")
@@ -56,3 +58,16 @@ print(f"Average Change: ${averagechange}")
 print(f"Greatest Increase in Profits: {maxmonth} (${max})")
 print(f"Greatest Increase in Profits: {minmonth} (${min})")
 print("---------------------")
+
+# Print to txt file
+file = open('PyBankResults.txt', 'w')
+print >>file, "                              "
+print >>file, "Financial Analysis"
+print >>file, "---------------------"
+print >>file, f"Total Months: {counter}"
+print >>file, f"Total: ${add}"
+print >>file, f"Average Change: ${averagechange}"
+print >>file, f"Greatest Increase in Profits: {maxmonth} (${max})"
+print >>file, f"Greatest Increase in Profits: {minmonth} (${min})"
+print >>file, "---------------------"
+file.close()
