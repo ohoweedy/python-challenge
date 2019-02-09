@@ -13,6 +13,7 @@ with open(pypollCSV, newline='') as csvfile:
     # Read the header row first
     csv_header = next(csvreader)
 
+    # Initialize variables and lists
     totalcounter=0
     candidates = []
     totals = []
@@ -61,6 +62,7 @@ correypercent = round(float(((totals[0])/totalcounter)*100), 2)
 lipercent = round(float(((totals[2])/totalcounter)*100), 2)
 tooleypercent = round(float(((totals[3])/totalcounter)*100), 2)
 
+# Print to terminal
 print("                               ")
 print("Election Results")
 print("---------------------")
@@ -73,3 +75,19 @@ print(f"O'Tooley: {tooleypercent}% ({totals[3]})")
 print("---------------------")
 print(f"Winner: {winner}")
 print("---------------------")
+
+# Export results to txt file
+output = open('PyPollResults.txt', 'w')
+print("                               ", file=output)
+print("Election Results", file=output)
+print("---------------------", file=output)
+print(f"Total Votes: {totalcounter}", file=output)
+print("---------------------", file=output)
+print(f"Khan: {khanpercent}% ({totals[1]})", file=output)
+print(f"Correy: {correypercent}% ({totals[0]})", file=output)
+print(f"Li: {lipercent}% ({totals[2]})", file=output)
+print(f"O'Tooley: {tooleypercent}% ({totals[3]})", file=output)
+print("---------------------", file=output)
+print(f"Winner: {winner}", file=output)
+print("---------------------", file=output)
+output.close()

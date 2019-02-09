@@ -27,6 +27,7 @@ with open(pybankCSV, newline='') as csvfile:
         profits.append(int(row[1]))
         months.append(str(row[0]))
     
+    # Append deltas list, and calculate average change
     for x in range(1,len(profits)):
         deltas.append(int(profits[x]) - int(profits[x-1]))
     
@@ -60,14 +61,14 @@ print(f"Greatest Increase in Profits: {minmonth} (${min})")
 print("---------------------")
 
 # Print to txt file
-file = open('PyBankResults.txt', 'w')
-print >>file, "                              "
-print >>file, "Financial Analysis"
-print >>file, "---------------------"
-print >>file, f"Total Months: {counter}"
-print >>file, f"Total: ${add}"
-print >>file, f"Average Change: ${averagechange}"
-print >>file, f"Greatest Increase in Profits: {maxmonth} (${max})"
-print >>file, f"Greatest Increase in Profits: {minmonth} (${min})"
-print >>file, "---------------------"
-file.close()
+output = open('PyBankResults.txt', 'w')
+print("                              ", file=output)
+print("Financial Analysis", file=output)
+print("---------------------", file=output)
+print(f"Total Months: {counter}", file=output)
+print(f"Total: ${add}", file=output)
+print(f"Average Change: ${averagechange}", file=output)
+print(f"Greatest Increase in Profits: {maxmonth} (${max})", file=output)
+print(f"Greatest Increase in Profits: {minmonth} (${min})", file=output)
+print("---------------------", file=output)
+output.close()
